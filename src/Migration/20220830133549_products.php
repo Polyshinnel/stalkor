@@ -17,8 +17,7 @@ final class Products extends Migration
             $table->string('param_three',256)->default(NULL);
             $table->string('price_one',256);
             $table->string('price_two',256)->default(NULL);
-
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->date('date_update');
         });
     }
 
