@@ -35,10 +35,13 @@ class CategoryParser
 
             $linkArr[] = $catArr;
         }
+
         return $linkArr;
+
+
     }
 
-    public function getChildCategories(HtmlWeb $client,$link)
+    private function getChildCategories(HtmlWeb $client,$link)
     {
         $childCategoryArr = [];
 
@@ -54,11 +57,14 @@ class CategoryParser
             $razmSelector = 'ul.razm_lst a';
             $razmArr = $this->getChildUnits($client,$link,$razmSelector);
 
+            //Удаляем из массива категорий вкладку размеры
             $arrDiff = array_diff_assoc($childLevelTwo,$razmArr);
+            //Чистим дубли
+            $clearArr = $this->getUniqueArr('link',$arrDiff);
 
 
             if(!empty($childLevelTwo)){
-                $item['child_2'] = $arrDiff;
+                $item['child_2'] = $clearArr;
             }
 
             $childCategoryArr[] = $item;
@@ -66,7 +72,7 @@ class CategoryParser
         return $childCategoryArr;
     }
 
-    public function getChildUnits(HtmlWeb $client,$link,$selector)
+    private function getChildUnits(HtmlWeb $client,$link,$selector)
     {
         $html = $client->load($link);
         $rootLink = $this->rootLink;
@@ -85,6 +91,20 @@ class CategoryParser
         return $linkArr;
     }
 
+    private function getUniqueArr($key,$arr)
+    {
+        $tmp = $key_array = array();
+        $i = 0;
+
+        foreach($arr as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $tmp[$i] = $val;
+            }
+            $i++;
+        }
+        return $tmp;
+    }
 
 
 }
