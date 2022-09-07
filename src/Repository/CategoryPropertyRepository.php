@@ -19,4 +19,9 @@ class CategoryPropertyRepository
     {
         $this->categoryProperty->create($createArr);
     }
+
+    public function getCategoryPropertyById(int $categoryId) : array
+    {
+        return $this->categoryProperty->where('category_id',$categoryId)->get()->toArray();
+    }
 }

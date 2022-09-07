@@ -13,7 +13,7 @@ class Product extends Model
         'id',
         'name',
         'category_id',
-        'size',
+        'site_id',
         'param_one',
         'param_two',
         'param_three',

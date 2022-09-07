@@ -24,4 +24,9 @@ class CategoryRepository
     {
         return $this->category->where($filter)->get()->toArray();
     }
+
+    public function getAllCategories()
+    {
+        return $this->category->all()->toArray();
+    }
 }

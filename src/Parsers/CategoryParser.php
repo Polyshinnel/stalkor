@@ -54,6 +54,7 @@ class CategoryParser
             $selectorChildLevelTwo = '.catalogItemList ul li a';
             $childLevelTwo = $this->getChildUnits($client,$link,$selectorChildLevelTwo);
 
+            //Получаем массив с размерами из выпадающего окна
             $razmSelector = 'ul.razm_lst a';
             $razmArr = $this->getChildUnits($client,$link,$razmSelector);
 

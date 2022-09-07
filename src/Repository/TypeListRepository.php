@@ -29,4 +29,9 @@ class TypeListRepository
     {
         $this->typeList->create($arr);
     }
+
+    public function getFilteredTypeList(array $filter) : array
+    {
+        return $this->typeList->where($filter)->get()->toArray();
+    }
 }

@@ -11,13 +11,13 @@ final class Products extends Migration
             $table->bigIncrements('id');
             $table->string('name',256);
             $table->BigInteger('category_id');
-            $table->string('size',256);
-            $table->string('param_one',256)->default(NULL);
-            $table->string('param_two',256)->default(NULL);
-            $table->string('param_three',256)->default(NULL);
-            $table->string('price_one',256);
-            $table->string('price_two',256)->default(NULL);
-            $table->date('date_update');
+            $table->string('site_id',256);
+            $table->string('param_one',256)->nullable();
+            $table->string('param_two',256)->nullable();
+            $table->string('param_three',256)->nullable();
+            $table->string('price_one',256)->nullable();
+            $table->string('price_two',256)->nullable();
+            $table->dateTime('date_update');
         });
     }
 

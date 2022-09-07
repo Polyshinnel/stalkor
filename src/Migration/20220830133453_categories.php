@@ -11,7 +11,7 @@ final class Categories extends Migration
             $table->bigIncrements('id');
             $table->string('name',255);
             $table->integer('parent');
-            $table->text('link')->default(NULL);
+            $table->text('link')->nullable();
         });
     }
 
