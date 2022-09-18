@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table = 'Users';
+    protected $table = 'users';
 }

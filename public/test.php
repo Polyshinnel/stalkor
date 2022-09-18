@@ -3,7 +3,7 @@
 //Тестовый файл для проверки работы парсера
 
 //URL Парсера
-$urlrest = 'http://stalkor.web/getProducts';
+$urlrest = 'https://stalkor.deploy-server.ru/getProducts';
 
 //Ключ авторизации
 $header = [
