@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset_url('assets/css/style.css?ver=03.06.2022') }}">
+    <link rel="icon" href="/assets/img/logo.png" type="image/png">
     <title>{{ title }}</title>
 </head>
 <body>
+
+    <header class="header">
+        <div class="box-container">
+            <div class="header__wrapper">
+                <a href="/"><img src="/assets/img/logo.png" alt=""></a>
+
+                <nav class="header__nav">
+                    <ul class="header__nav-list">
+                        <li class="header__nav-list-item"><a href="/">Категории</a></li>
+                        <li class="header__nav-list-item"><a href="/dictionary">Словарь</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>

@@ -3,6 +3,7 @@
 
 namespace App\Pages;
 
+
 use App\Repository\CategoryRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,7 +12,7 @@ use Slim\Psr7\Headers;
 use Slim\Psr7\Response;
 use Slim\Views\Twig;
 
-class IndexPage
+class CategoryPage
 {
     private $twig;
     private $categoryRepository;
@@ -24,21 +25,33 @@ class IndexPage
         $this->pageHelpers = $pageHelpers;
     }
 
-    public function get(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function get(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $categoryFilter = ['parent' => 0];
+        $parentId = $args['id'];
+        $filter = ['parent' => $parentId];
 
-        $categoryData = $this->pageHelpers->getClearCategory($categoryFilter);
+        $categoryData = $this->pageHelpers->getClearCategory($filter);
 
-        $data = $this->twig->fetch('index.twig', [
+        $filterCurrCat = ['id' => $parentId];
+        $currCategoryName = $this->categoryRepository->getFilteredCategory($filterCurrCat);
+
+        $categoryName = $currCategoryName[0]['name'];
+
+        $breadcrumb = $this->pageHelpers->getBreadCrumbs($parentId);
+
+
+        $data = $this->twig->fetch('category.twig', [
             'title' => 'Парсер "Металлл - Сервис"',
-            'categories' => $categoryData
+            'categories' => $categoryData,
+            'categoryName' => $categoryName,
+            'breadCrumbs' => $breadcrumb
         ]);
-
         return new Response(
             200,
             new Headers(['Content-Type' => 'text/html']),
             (new StreamFactory())->createStream($data)
         );
     }
+
+
 }

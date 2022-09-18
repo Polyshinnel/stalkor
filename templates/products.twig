@@ -1,0 +1,65 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+
+    <div class="page-block">
+        <div class="box-container">
+            <h1 class="page-block__title">{{ categoryName }}</h1>
+
+            <ul class="breadcrumps">
+                {% for breadCrumb in breadCrumbs %}
+                    <li><a href="{{ breadCrumb.url }}">{{ breadCrumb.name }}</a>&nbsp;/&nbsp;</li>
+                {% endfor %}
+                <li>{{ categoryName }}</li>
+            </ul>
+
+            <div class="page-block__wrapper">
+                <div class="page-table">
+                    <div class="page-table__header">
+                        <img src="/assets/img/icons/accept.svg" alt="">
+                        <p class="page-table__header-name">Наименование</p>
+                        <p class="page-table__header-sku">{{ typeList.column_one }}</p>
+                        <p class="page-table__header-brand">{{ typeList.column_two }}</p>
+                        <p class="page-table__header-price">{{ typeList.column_three }}</p>
+                        <p class="page-table__header-quantity">Цена 1</p>
+                        <p class="page-table__header-sold">Цена 2</p>
+                        <p class="page-table__header-groupSoldQuant">Дата обновления</p>
+                    </div>
+                    <div class="page-table__units-wrapper">
+                        {% for product in products %}
+                            <div class="page-table__unit">
+                                <div class="page-table__unit-favorite">
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.97895 9.85263C7.24737 10.1211 7.73684 10.1211 8.00526 9.85263L10.8474 7.01053C11.1316 6.72632 11.1316 6.26842 10.8474 5.98421C10.5632 5.7 10.1053 5.7 9.82105 5.98421L7.5 8.30526L5.17895 5.98421C5.03684 5.84211 4.84737 5.76316 4.65789 5.76316C4.46842 5.76316 4.27895 5.84211 4.13684 5.98421C3.85263 6.26842 3.85263 6.72632 4.13684 7.01053L6.97895 9.85263Z" fill="#DA2128"/>
+                                        <path d="M7.5 15C11.6368 15 15 11.6368 15 7.5C15 3.36316 11.6368 0 7.5 0C3.36316 0 0 3.36316 0 7.5C0 11.6368 3.36316 15 7.5 15ZM7.5 1.45263C10.8316 1.45263 13.5474 4.16842 13.5474 7.5C13.5474 10.8316 10.8316 13.5474 7.5 13.5474C4.16842 13.5474 1.45263 10.8316 1.45263 7.5C1.45263 4.16842 4.16842 1.45263 7.5 1.45263Z" fill="#DA2128"/>
+                                    </svg>
+                                </div>
+
+                                <a href="#" class="page-table__unit-link">
+                                    <div class="page-table__unit-img">
+                                        <img src="/assets/img/icons/empty-shop.svg" alt="">
+                                    </div>
+                                </a>
+
+                                <a href="/products/{{ product.id }}" class="page-table__unit-link">
+                                    <p class="page-table__unit-name">{{ product.name}}</p>
+                                </a>
+
+
+                                <p class="page-table__unit-sku">{{ product.param_one}}</p>
+
+                                <p class="page-table__unit-brand">{{ product.param_two}}</p>
+                                <p class="page-table__unit-price">{{ product.param_three}}</p>
+                                <p class="page-table__unit-quantity">{{ product.price_one}}</p>
+                                <p class="page-table__unit-sold">{{ product.price_two}}</p>
+                                <p class="page-table__unit-groupSoldQuant">{{ product.date_update}}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

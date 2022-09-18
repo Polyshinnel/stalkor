@@ -29,4 +29,9 @@ class ProductRepository
     {
         $this->product->where($filterArr)->update($updateArr);
     }
+
+    public function getAllProducts() : array
+    {
+        return $this->product->all()->toArray();
+    }
 }

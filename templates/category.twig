@@ -4,7 +4,14 @@
 
     <div class="page-block">
         <div class="box-container">
-            <h1 class="page-block__title">Категории</h1>
+            <h1 class="page-block__title">{{ categoryName }}</h1>
+
+            <ul class="breadcrumps">
+                {% for breadCrumb in breadCrumbs %}
+                    <li><a href="{{ breadCrumb.url }}">{{ breadCrumb.name }}</a>&nbsp;/&nbsp;</li>
+                {% endfor %}
+                <li>{{ categoryName }}</li>
+            </ul>
 
             <div class="page-block__wrapper">
                 <div class="page-block__cards-wrapper">

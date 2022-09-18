@@ -48,7 +48,8 @@ class ProductHelper
                 $categoryUnit = [
                     'id' => $category['id'],
                     'link' => $category['link'].'/PageAll/1',
-                    'type' => $typeList[0]['type']
+                    'type' => $typeList[0]['type'],
+                    'name' => $category['name'],
                 ];
 
                 if(empty($typeList))
@@ -78,18 +79,35 @@ class ProductHelper
         return $productCategories;
     }
 
-    public function processingProducts() : void
+    public function processingProducts()
     {
         $productsLinks = $this->getProductCategoryList();
+
+        $countCreated = 0;
+        $countUpdated = 0;
+
         foreach ($productsLinks as $productsLinkItem)
         {
-            print_r($productsLinkItem);
             $products = $this->productParser->getProducts($productsLinkItem);
-            foreach ($products as $product)
+            if(!empty($products))
             {
-                $this->createOrUpdateProduct($product);
+                foreach ($products as $product)
+                {
+                    $processingResult = $this->createOrUpdateProduct($product);
+                    if($processingResult == 'updated')
+                    {
+                        $countUpdated++;
+                    }
+                    else
+                    {
+                        $countCreated++;
+                    }
+                }
             }
         }
+
+        $stringResult = 'На момент: '.date('m-d-Y H:i:s').',парсинг завершен. Обновлено '.$countUpdated.', Создано: '.$countCreated;
+        print_r($stringResult);
     }
 
     private function checkProduct(array $product)
@@ -113,7 +131,7 @@ class ProductHelper
         return false;
     }
 
-    private function createOrUpdateProduct(array $product) : void
+    private function createOrUpdateProduct(array $product)
     {
         $checkResult = $this->checkProduct($product);
         if($checkResult)
@@ -131,11 +149,15 @@ class ProductHelper
                     'date_update' => $product['date_update']
                 ];
                 $this->productRepository->updateProduct($filterArr,$updateArr);
+
             }
+
+            return 'updated';
         }
         else
         {
             $this->productRepository->createProduct($product);
+            return 'created';
         }
     }
 

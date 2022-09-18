@@ -29,4 +29,18 @@ class CategoryRepository
     {
         return $this->category->all()->toArray();
     }
+
+    public function getAllCategoriesWithType()
+    {
+        return $this->category::select(
+            'categories.id as category_id',
+            'categories.name',
+            'categories.parent',
+            'categories.link',
+            'category_property.type'
+        )
+            ->leftjoin('category_property','categories.id','=','category_property.category_id')
+            ->get()
+            ->toArray();
+    }
 }
